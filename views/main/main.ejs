@@ -1,0 +1,158 @@
+  <%- include('../includes/head.ejs')%>
+  </head>
+
+  <body class="bg-light">
+    <!-- Navbar -->
+    <%- include('../includes/navMain.ejs')%>
+    <!-- Landing -->
+    <!-- <div class="landing">
+      <div class="dark-overlay landing-inner text-light">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <h1 class="display-3 mb-4 text-secondary">Your Searching App</h1>
+              <p class="lead text-secondary">
+                Search For Doctors, Mechanics, Shops, Hotels and Many More...
+              </p>
+              <hr />
+              <div class="container"> -->
+    <!-- <div class="row"> -->
+    <!-- <div class="col-md-8 m-auto"> -->
+    <!-- <h1 class="display-4 text-center text-secondary">Search Here</h1> -->
+    <!-- <p class="lead text-center text-dark">Search for regerherherherhherhe</p> -->
+    <!-- <% if(errors) { %>
+                    <p class="lead text-center text-danger"><%= errors.msg%></p>
+                    <% } %>
+                    <form action="/searchResults" method="POST">
+                      <div class="form-group row">
+                        <div class="col-sm-4 mb-4">
+                          <select class="form-control" name="category">
+                            <option value="<%= false %>" selected>Categories</option>
+                            <% for(let cat of cats) {%>
+                            <option value="<%= cat.category %>"><%= cat.category %></option>
+                            <%}%>  
+                        </select>
+                        </div> -->
+    <!-- <small class="form-text text-muted text-secondary"
+                          >Select Category For your search</small
+                        > -->
+    <!-- <div class="form-group col-sm-8">
+                            <input type="text"  class="form-control" name="location" placeholder="location" id="" value="">
+                        </div>    
+                      </div>
+
+                      <div class="form-group row">
+                          <div class="col-sm-9 mb-4">
+                              <input
+                                type="text"
+                                class="form-control form-control-user cus-padding"
+                                placeholder="keywords"
+                                name="keywords"
+                              />
+                            </div>
+                            <div class="form-group col-sm-3">
+                            <button
+                              type="submit"
+                              value=""
+                              class="btn btn-info btn-block cus-padding"
+                            >
+                              Search
+                            </button>
+                          
+                          </div>
+                      </div> -->
+    <!-- <div class="form-group ">
+                        <input
+                          type="text"
+                          class="form-control form-control-lg"
+                          placeholder="keywords"
+                          name="keywords"
+                        />
+                      </div>
+                      <div class="form-group ">
+                      <button
+                        type="submit"
+                        value=""
+                        class="btn btn-info btn-block mt-4"
+                      >
+                        Search
+                      </button>
+                    </div> -->
+    <!-- </form> -->
+    <!-- </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+
+
+    <div class="container">
+      <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+          <!-- Nested Row within Card Body -->
+          <div class="row">
+            <div class="col-lg-2 d-none d-lg-block"></div>
+            <div class="col-lg-8">
+              <div class="p-5">
+                <h1 class="display-4 mb-4 text-secondary">Your Searching App</h1>
+                <p class="lead text-secondary">
+                  Search For Doctors, Mechanics, Shops, Hotels and Many More...
+                </p>
+                <hr />
+                <div class="text-center">
+                  <h1 class="h4 text-gray-900 mb-4">Search Here!</h1>
+                </div>
+                <% if(errors) { %>
+                <p class="lead text-center text-danger"><%= errors%></p>
+                <% } %>
+                <form class="user" action="/searchResults" novalidate method="GET">
+
+                  <div class="form-group row">
+                    <div class="col-sm-3 mb-3 mb-sm-0">
+                      <select class="form-control form-control cus-border" name="category">
+                        <option value="<%= false %>" selected>Categories</option>
+                        <% for(let cat of cats) {%>
+                        <option value="<%= cat.category %>"><%= cat.category %></option>
+                        <%}%>  
+                      </select>  
+                    </div>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control form-control-user" name="location" placeholder="Location" >
+                          </div>
+                  </div>
+                      <div class="form-group row">
+                          <div class="col-sm-9 mb-3 mb-sm-0">
+                              <input
+                              type="text"
+                              class="form-control form-control-user"
+                              placeholder="keywords"
+                              name="keywords"
+                            />
+                          </div>
+                          <div class="col-sm-3">
+                            <button type="submit" class="btn btn-info btn-user btn-block">Search</button>
+                          </div>
+                      </div>        
+                      <hr>
+                    </form>
+                    <hr>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+<!-- 
+      </div>
+    </div> -->
+    <!-- Footer -->
+    <%- include('../includes/end.ejs')%>

@@ -1,0 +1,100 @@
+<%- include('../includes/head.ejs')%>
+  </head>
+
+  <body class="bg-gradient-light" id="page-top">
+    <!-- Navbar -->
+    <%- include('../includes/navMain.ejs')%>
+    <!-- Profiles -->
+    <% if(results.length > 0){ %>
+      <div class="profiles">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <% if(!reportText) { %>
+              <h1 class="display-4 text-center">Search Results</h1>
+              <p class="lead text-center">
+                We tried to bring you the best results
+              </p>
+              <% } %>
+              <% if(reportText) { %>
+                <p class="lead text-center text-danger mt-4">
+                    <%= reportedCon%>
+                  </p>
+              <% } %>
+              <!-- Profile Item -->
+              <% for(let result of results) {  %>
+              <div class="card card-body bg-white mb-3 border-bottom text-dark card  border-0 shadow-lg my-5" >
+                <div class="row">
+                  <div class="col-lg-4 text-sm-center">
+                    <img class="rounded" src="/<%= result.entity_img%>" alt="No Image" />
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-8">
+                    <h3 id="name" class = "navbar-brand">
+                      <i class="far fa-id-card fa-lg"></i> <%= result.title %>
+                    </h3>
+                    <p id="address">
+                      <i class="fas fa-address-book"></i> Address : <%= result.address%>
+                    </p>
+                    <p><i class="fas fa-arrow-right"></i> Category : <%= result.category %></p>
+                    <p><i class="fas fa-user-md"></i> Description : <%= result.entity_desc %></p>
+                    <p id="contact-num">
+                      <i class="fas fa-phone-volume"></i> 0<%= result.entity_phn%>
+                    </p>
+
+                    <!-- <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+                    <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+                    <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+                    <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+                    <i class="fa fa-star fa-lg" aria-hidden="true"></i> -->
+
+                    <!-- <a href="profile.html" class="btn btn-info">View Profile</a> -->
+                  </div>
+                  <div class="col-md-3  d-lg-block ">
+                    <h5><i class="fab fa-servicestack"></i> Services</h5>
+                    <!-- <ul class="list-group"> -->
+                    <!-- <li class="list-group-item">Python</li> -->
+                    <p><%=result.services%></p>
+                    <!-- </ul> -->
+                    <h5><i class="far fa-clock"></i> Opens From</h5>
+                    <p><%= result.opening_time%> <span class="text-info"> To </span><%= result.closing_time%></p>
+                    <p><small><i class="far fa-user fa-lg"></i> posted by:</small> <a class="btn btn-outline-info btn-sm" href="/profile/<%= result.user_id %>"><small>View Profile</small></a></p>
+                    <% if(logedIn) {%>
+                      <% if(!reportText) {%>
+                        <form action="/admin/reportPost/<%= result.id%>" method="post">
+                          <div class="form-row">
+                            <div class="col-sm-8 mb-3 mb-sm-0">
+                              <input type="text" class="form-control form-control-user" name="reportText" id="" placeholder="Report Message">
+                            </div>
+                            <div class="col-sm-4 mb-3 mb-sm-0">  
+                              <input type="submit" class="form-control form-control-user btn btn-outline-info btn-sm" value="Report" > 
+                            </div>
+                          </div>  
+                        </form>
+                      <% } %>  
+                    <% } %>  
+                    <!-- <h5>Average Rating</h5> -->
+                    <!-- <li class="list-group-item"> -->
+                    <!-- <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i> -->
+                    <!-- </li>  -->
+                  </div>
+                </div>
+              </div>
+              <% }%>
+              <!-- Profile Item -->
+            </div>
+          </div>
+        </div>
+      </div>
+    <% } else {%>
+      <h1 class="display-4 text-center lead mb-cus">Nothing Found</h1>
+    <% }%>  
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+      </a>
+
+    <!-- Footer  -->
+    <%- include('../includes/end.ejs')%>

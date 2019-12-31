@@ -1,0 +1,45 @@
+<%- include('../includes/head.ejs')%>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <%- include('../includes/navMain.ejs')%>
+  <!-- Login -->
+  <div class="login">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 m-auto">
+          <h1 class="display-4 text-center">Log In</h1>
+          <p class="lead text-center">Sign in to your KSE account</p>
+          <% if(errorMessage){ %>
+            <p class="lead text-center text-danger"><%= errorMessage %></p>
+          <% } %>
+          <form action="/login" method="POST">
+            <!-- <div class="form-group">
+              <input type="text" class="form-control form-control-lg" placeholder="Phone Number" name="phnNum" />
+            </div> -->
+
+            <div class="form-group">
+                <small class="form-text text-muted ">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Phone Number</small>
+                            
+                    <label class="sr-only" for="inlineFormInputGroup">Phone Number</label>
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">0</div>
+                      </div>
+                      <input type="text" class="form-control form-control-lg <%= validationErrors.find(e => e.param === 'phnNum') ? 'is-invalid' : '' %>" id="Phone Number" placeholder="Phone Number" value="<%= oldInput.phnNum%>" name="phnNum" />
+                    </div>
+
+            <div class="form-group">
+                <small class="form-text text-muted ">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Password</small>
+              <input type="password" class="form-control form-control-lg <%= validationErrors.find(e => e.param === 'password') ? 'is-invalid' : '' %>" placeholder="Password" name="password" value="<%= oldInput.password%>" />
+            </div>
+            <input type="submit" class="btn btn-info btn-block mt-4" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <%- include('../includes/end.ejs')%>

@@ -1,0 +1,63 @@
+<%- include('../includes/head.ejs')%>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <%- include('../includes/navMain.ejs')%>
+  <!-- Register -->
+  <div class="register">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 m-auto">
+          <h1 class="display-4 text-center">Sign Up</h1>
+          <p class="lead text-center">Create your Account/Profile</p>
+          <% if(errorMessage) { %>
+            <p class="lead text-center text-danger"><%= errorMessage.msg%></p>
+          <% } %>  
+          <form action="/signup" method="POST" novalidate enctype="multipart/form-data">
+            <div class="form-group">
+                <small class="form-text text-muted ">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp First Name</small>
+              <input type="text" class="form-control form-control-lg <%= validationErrors.find(e => e.param ==='fname') ? 'is-invalid' : '' %>" placeholder="First Name" name="fname" value="<%= oldInput.fname%>" required />
+            </div>
+            <div class="form-group">
+                <small class="form-text text-muted ">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Last Name</small>
+              <input type="text" class="form-control form-control-lg <%= validationErrors.find(e => e.param ==='lname') ? 'is-invalid' : '' %>" placeholder="Last Name" name="lname" value="<%= oldInput.lname%>" required />
+            </div>
+            <div class="form-group">
+              <small class="form-text text-muted ">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Phone Number</small>
+                          
+                  <label class="sr-only" for="inlineFormInputGroup">Phone Number</label>
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">0</div>
+                    </div>
+                    <input type="text" class="form-control form-control-lg <%= validationErrors.find(e => e.param ==='phoneNumber') ? 'is-invalid' : '' %>" id="Phone Number" placeholder="Phone Number" value="<%= oldInput.user_phn%>" pattern = "^\d{10}$" name="phoneNumber" />
+                  </div>
+                  
+              <!-- <input type="text" class="form-control form-control-lg" id="phoneNumber" placeholder="Phone Number" value="<%= oldInput.user_phn%>" pattern = "^\d{10}$" name="phoneNumber" /> -->
+            </div>
+            <div class="form-group">
+                <small class="form-text text-muted ">&nbsp&nbsp&nbsp&nbsp&nbsp&nbspPassword</small>
+              <input type="password" class="form-control form-control-lg <%= validationErrors.find(e => e.param ==='password') ? 'is-invalid' : '' %>" placeholder="Password" name="password" value="<%= oldInput.password%>" />
+            </div>
+            <div class="form-group">
+                <small class="form-text text-muted ">&nbsp&nbsp&nbsp&nbsp&nbsp&nbspConfirm Password</small>
+              <input type="password" class="form-control form-control-lg <%= validationErrors.find(e => e.param ==='conPassword') ? 'is-invalid' : '' %>" placeholder="Confirm Password" name="conPassword" value="<%= oldInput.conPassword%>" />
+            </div>
+            <div class="form-group">
+                <small class="form-text text-muted ">&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDate Of Birth</small>
+              <input type="date" class="form-control form-control-lg <%= validationErrors.find(e => e.param ==='dob') ? 'is-invalid' : '' %>" placeholder="Date Of Birth" name="dob" value="<%= oldInput.dob%>" />
+            </div>
+            <div class="form-group">
+                <small class="form-text text-muted ">&nbsp&nbsp&nbsp&nbsp&nbsp&nbspChoose Your Picture</small>
+              <input type="file" class="form-control form-control-lg" placeholder="Your Picture" name="profilePicture" />
+            </div>
+            <button type="submit" class="btn btn-info btn-block mt-4">Register</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <%- include('../includes/end.ejs')%>

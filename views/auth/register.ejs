@@ -1,0 +1,75 @@
+<%- include('../includes/head.ejs')%>
+
+</head>
+
+<body class="bg-gradient-light">
+  <!-- Navbar -->
+  <%- include('../includes/navMain.ejs')%>  
+  <div class="container">
+
+    <div class="row justify-content-center">
+
+      <div class="col-xl-10 col-lg-12 col-md-9">
+
+        <div class="card o-hidden border-0 shadow-lg my-5"> 
+          <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+              <div class="col-lg-2 d-none d-lg-block "></div>
+              <div class="col-lg- text-center">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                  </div>
+                  <% if(errorMessage) { %>
+                    <p class="lead text-center text-danger"><%= errorMessage.msg%></p>
+                  <% } %>
+                  <form class="user" action="/signup" method="POST" novalidate enctype="multipart/form-data">
+                    <div class="form-group row">
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                        <input type="text" class="form-control form-control-user <%= validationErrors.find(e => e.param ==='fname') ? 'is-invalid' : '' %>" placeholder="First Name" name="fname" value="<%= oldInput.fname%>">
+                      </div>
+                      <div class="col-sm-6">
+                        <input type="text" class="form-control form-control-user <%= validationErrors.find(e => e.param ==='lname') ? 'is-invalid' : '' %>" placeholder="Last Name" name="lname" value="<%= oldInput.lname%>" required>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control form-control-user <%= validationErrors.find(e => e.param ==='phoneNumber') ? 'is-invalid' : '' %>" id="Phone Number"  value="<%= oldInput.user_phn%>" name="phoneNumber"  placeholder="Phone Number">
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                        <input type="password" class="form-control form-control-user <%= validationErrors.find(e => e.param ==='password') ? 'is-invalid' : '' %>" placeholder="Password" name="password" value="<%= oldInput.password%>">
+                      </div>
+                      <div class="col-sm-6">
+                        <input type="password" class="form-control form-control-user %= validationErrors.find(e => e.param ==='conPassword') ? 'is-invalid' : '' %>" placeholder="Confirm Password" name="conPassword" value="<%= oldInput.conPassword%>">
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                        <input type="date" class="form-control form-control-user <%= validationErrors.find(e => e.param ==='dob') ? 'is-invalid' : '' %>" placeholder="Date Of Birth" name="dob" value="<%= oldInput.dob%>">
+                      </div>
+                      <div class="col-sm-6">
+                        <input type="file" class="form-control form-control-user" placeholder="Your Picture" name="profilePicture">
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-info btn-user btn-block">
+                      Register Account
+                    </button>
+                    <hr>
+                    
+                  </form>
+                  <hr>
+                  <div class="text-center">
+                    <a class="small" href="/login">Already have an account? Login!</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>  
+    </div> 
+  </div>
+
+  <%- include('../includes/end.ejs')%>

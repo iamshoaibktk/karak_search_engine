@@ -1,0 +1,126 @@
+<%- include('../includes/head.ejs')%>
+</head>
+
+<body class="bg-gradient-light">
+  <!-- Navbar -->
+  <%- include('../includes/navMain.ejs')%>
+  <!-- Register -->
+  <div class="register">
+    <div class="container">
+      <!-- <div class="row">
+        <div class="col-md-8 m-auto">
+          <h1 class="display-4 text-center">Edit Your Profile</h1>
+          <% if(errors) { %>
+            <p class="lead text-center text-danger"><%= errors.msg%></p>
+          <% } %>
+          <form action="/admin/editProfile<%= '/' + results.id%>" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <small class="form-text text-muted ">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp First Name</small>
+              <input type="text" class="form-control form-control-lg" placeholder="First Name" name="fname" value="<%= results.fname%>" required />
+            </div>
+            <div class="form-group">
+                <small class="form-text text-muted ">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp last Name</small>
+              <input type="text" class="form-control form-control-lg" placeholder="last Name" name="lname" value="<%= results.lname%>" required />
+            </div>
+            <div class="form-group">
+                <small class="form-text text-muted ">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Phone Number</small>
+              <input type="text" class="form-control form-control-lg" placeholder="Phone Number" name="phoneNumber" value="<%= results.user_phn%>" />
+            </div> -->
+      <!-- <div class="form-group">
+                <small class="form-text text-muted ">&nbsp&nbsp&nbsp&nbsp&nbsp&nbspPassword</small>
+              <input type="password" class="form-control form-control-lg" placeholder="Password" name="password" value="<%= results.password%>" />
+            </div> -->
+      <!-- <div class="form-group">
+                <small class="form-text text-muted ">&nbsp&nbsp&nbsp&nbsp&nbsp&nbspChoose Your Picture</small>
+              <input type="file" class="form-control form-control-lg" id="profilePicture" placeholder="Your Picture" name="profilePicture" />
+            </div>
+            <div class="form-group">
+              <input type="hidden" class="form-control form-control-lg" placeholder="" name="id" value="<%= results.id%>" />
+            </div>
+            <button type="submit" class="btn btn-info btn-block mt-4">Submit</button>
+          </form>
+ -->
+
+
+
+
+
+      <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+          <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+              <!-- Nested Row within Card Body -->
+              <div class="row">
+                <div class="col-lg-3 d-none d-lg-block "></div>
+                <div class="col-lg- text-center">
+                  <div class="p-5">
+                    <div class="text-center">
+                      <h1 class="h4 text-gray-900 mb-4">Edit Your Profile!</h1>
+                    </div>
+                    <% if(errors) { %>
+                    <p class="lead text-center text-danger"><%= errors.msg%></p>
+                    <% } %>
+                    <form class="user" action="/admin/editProfileSubmit<%= '/' + results.id%>" method="POST"
+                      enctype="multipart/form-data">
+                      <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                          <input type="text" class="form-control form-control-user" placeholder="First Name"
+                            name="fname" value="<%= results.fname%>">
+                        </div>
+                        <div class="col-sm-6">
+                          <input type="text" class="form-control form-control-user" placeholder="Last Name" name="lname"
+                            value="<%= results.lname%>" required>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <input type="text" class="form-control form-control-user " id="Phone Number"
+                          value="<%= results.user_phn%>" name="phoneNumber" placeholder="Phone Number">
+                      </div>
+
+                      <div class="form-group row">
+
+                        <div class="col-sm-12">
+                          <input type="file" class="form-control form-control-user" placeholder="Your Picture"
+                            name="profilePicture">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <input type="hidden" placeholder="" name="id" value="<%= results.id%>" />
+                      </div>
+                      <button type="submit" class="btn btn-info btn-user btn-block">
+                        Submit
+                      </button>
+                      <hr>
+
+                    </form>
+                    <hr>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Footer -->
+  <%- include('../includes/end.ejs')%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

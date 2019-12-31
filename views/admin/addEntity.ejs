@@ -1,0 +1,150 @@
+<%- include('../includes/head.ejs')%>
+</head>
+
+<body>
+  <!-- Navbar (Signed in) -->
+  <%- include('../includes/navMain.ejs')%>
+  <!-- Add Entity -->
+  <!-- <div class="create-profile">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 m-auto">
+          <h1 class="display-4 text-center">Add Entity</h1>
+          <p class="lead text-center">Let's get some information about your Entity</p>
+          <form action="/admin/addingEntity" method="POST" enctype="multipart/form-data"> 
+            <div class="form-group">
+              <input type="text" class="form-control form-control-lg" placeholder="Title or Name" name="title" value=""
+                required />
+              <small class="form-text text-muted">This might be your Name or the name of bussiness you have </small>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control form-control-lg" placeholder="Category" name="category" value=""
+                required />
+              <small class="form-text text-muted">Category</small>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control form-control-lg" placeholder="Description" name="description" value="" />
+              <small class="form-text text-muted">Description about your title</small>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control form-control-lg" placeholder="Address" name="address" value="" />
+              <small class="form-text text-muted">your Address</small>
+            </div>
+            <div class="form-group">
+              <input type="tel" class="form-control form-control-lg" placeholder="Contact Number" name="entityPhnNum"
+                value="" />
+              <small class="form-text text-muted">Phone Number</small>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control form-control-lg" placeholder="services" name="entityServices"
+                value="" />
+              <small class="form-text text-muted">Please use comma separated values (eg. Bike Repairing,car
+                Washing,Easypaisa)</small>
+            </div>
+            <div class="form-group">
+              <input type="time" class="form-control form-control-lg text-center" placeholder="opening time"
+                name="EopeningTime" value="" />
+              <small class="form-text text-muted">Openeing Time</small>
+            </div>
+            <div class="form-group">
+              <input type="time" class="form-control form-control-lg text-center" placeholder=""
+                name="EclosingTime" value="" />
+              <small class="form-text text-muted">Closing Time</small>
+            </div>
+
+            <div class="form-group">
+              <input type="file" class="form-control form-control-lg text-center" placeholder=""
+                name="profilePicture" id="profilePicture" value="" />
+              <small class="form-text text-muted">Select Image</small>
+            </div>
+            <input type="submit" class="btn btn-info btn-block mt-4" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+ -->
+
+  <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+          <div class="card o-hidden border-0 shadow-lg my-5"> 
+            <div class="card-body p-0">
+              <!-- Nested Row within Card Body -->
+              <div class="row">
+                <div class="col-lg-3 d-none d-lg-block "></div>
+                <div class="col-lg- text-center">
+                  <div class="p-5">
+                    <div class="text-center">
+                      <h1 class="h4 text-gray-900 mb-4">Add Entity</h1>
+                    </div>
+
+                    <p class="lead text-center text-danger"><%= errors.msg%></p>
+                    <form class="user" action="/admin/addingEntity" method="POST" enctype="multipart/form-data" novalidate>
+                      <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                          <input type="text" class="form-control form-control-user"  placeholder="Title or Name" name="title" value="<%= oldData.title%>"
+                          required>
+                        </div>
+                        <div class="col-sm-6">
+                          <input type="text" class="form-control form-control-user"placeholder="Category" name="category" value="<%= oldData.category%>"
+                          required>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <input type="textarea" class="form-control form-control-user"placeholder="Description" name="description" value="<%= oldData.description%>">
+                      </div>
+                      <div class="form-group ">
+                        <div class=" mb-3 mb-sm-0">
+                          <input type="text" class="form-control form-control-user" placeholder="Address" name="address" value="<%= oldData.address%>">
+                        </div>
+                      </div>  
+                      <div class="form-group">
+                        <div class="">
+                          <input type="tel" class="form-control form-control-user" placeholder="Phone Number" name="entityPhnNum" value="<%= oldData.entityPhnNum%>">
+                        </div>
+                      </div>
+  
+                      <div class="form-group">
+                        <div class="mb-3 mb-sm-0">
+                          <input type="text" class="form-control form-control-user" placeholder="Services" name="entityServices" value="<%= oldData.entityServices%>">
+                        </div>
+                      </div>
+                      <div class="form-group row">  
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                          <small>Opening Time</small>
+                          <input type="time" class="form-control form-control-user" placeholder="Opening Time" name="EopeningTime" value="<%= oldData.EopeningTime%>">
+                        </div>
+                        <div class="col-sm-6 ">
+                            <small>Closing Time</small>
+                            <input type="time" class="form-control form-control-user" placeholder="Closing Time" name="EclosingTime" value="<%= oldData.EclosingTime%>">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                          <div class="">
+                              <small>Select an image</small>
+                              <input type="file" class="form-control form-control-user" placeholder="Select Image" name="profilePicture">
+                          </div>
+                      </div>
+                      <button type="submit" class="btn btn-info btn-user btn-block">
+                        Submit
+                      </button>
+                      <hr>
+                    </form>
+                    <hr>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>  
+      </div> 
+    </div>
+
+
+
+
+
+
+  <!-- Footer -->
+  <%- include('../includes/end.ejs')%>

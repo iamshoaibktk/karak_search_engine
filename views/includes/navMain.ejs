@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-sm  mb-4 navbar-light bg-white p-3 shadow ">
+    <div class="container">
+      <a class="navbar-brand text-info" href="/"
+        ><i class="fas fa-home"></i> Karak Searching App</a
+      >
+      <button
+        class="navbar-toggler "
+        type="button"
+        data-toggle="collapse"
+        data-target="#mobile-nav"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mobile-nav">
+        <ul class="navbar-nav ml-auto">
+          
+          <% if(!logedIn) {%>
+            <% if(registerNav) {%>
+                <li class="nav-item ">
+                <a class="nav-link text-info" href="/signup"
+                  ><i class="fas fa-user-plus"></i> Sign Up</a
+                >
+              </li>
+            <%}%>
+            <% if(loginNav) {%>
+              <li class="nav-item">
+                <a class="nav-link text-info" href="/login"
+                  ><i class="fas fa-sign-in-alt"></i> Login</a
+                >
+              </li>
+            <%}%>
+          <% } %>
+
+          <% if(logedIn) {%>
+            <% if(profileNav) {%>
+              <li class="nav-item">
+                <a class="nav-link text-info" href="/admin/profile">
+                  Profile
+                </a>
+              </li>
+              <% } %> <% if(addEntityNav) {%>
+              <li class="nav-item">
+                <a class="nav-link text-info" href="/admin/addEntity">
+                  Add Entity
+                </a>
+              </li>
+              <% } %> <% if(dashboardNav) { %>
+              <li class="nav-item">
+                <a class="nav-link text-info" href="/admin/dashboard">
+                  Dashboard
+                </a>
+              </li>
+              <% } %>
+              <li class="nav-item">
+                <form action="/logout" method="POST">
+                  <button class="nav-link border-0 bg-transparent text-info" type="submit">Logout</button>
+                </form>
+            
+              </li>
+            <% } %>
+        </ul>
+      </div>
+    </div>
+  </nav>

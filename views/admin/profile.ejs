@@ -1,0 +1,67 @@
+<%- include('../includes/head.ejs')%>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <%- include('../includes/navMain.ejs')%>
+  <!-- Profile -->
+  <div class="profile">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <% if(edit) {%>
+          <div class="row">
+            <div class="col-6">
+              <form action="editProfile/<%= user.id%>" method="post">
+                <button type="submit" class="btn btn-light mb-3 float-left">Edit Profile</button>
+              </form>
+              <!-- <a href="editProfile/<%= user.id%>" class="btn btn-light mb-3 float-left">Edit Profile</a> -->
+            </div>
+            <div class="col-6">
+
+            </div>
+          </div>
+          <%}%>
+
+          <!-- Profile Header -->
+          <div class="row">
+              <div class="col-md-12">
+                <div class="card card-body bg-white shadow text-dark mb-3">
+                  <div class="row img-fluid">
+                    <div class="col-4 col-md-3 m-auto ">
+                      <img class=" mx-auto d-block rounded-circle shadow-cus " style="height: 200px; width: 200px;" src="\<%= user.profile_img%>" alt="" />
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <h1 class="display-4 text-center"><%= user.fname + ' ' + user.lname%></h1>
+                    <p class="lead text-center">Contact: 0<%= user.user_phn%></p>
+                    <p>Account Created at: <%= user.created_at%></p>
+                    <!-- <p>
+                      <a class="text-white p-2" href="#">
+                        <i class="fas fa-globe fa-2x"></i>
+                      </a>
+                      <a class="text-white p-2" href="#">
+                        <i class="fab fa-twitter fa-2x"></i>
+                      </a>
+                      <a class="text-white p-2" href="#">
+                        <i class="fab fa-facebook fa-2x"></i>
+                      </a>
+                      <a class="text-white p-2" href="#">
+                        <i class="fab fa-linkedin fa-2x"></i>
+                      </a>
+                      <a class="text-white p-2" href="#">
+                        <i class="fab fa-instagram fa-2x"></i>
+                      </a>
+                    </p> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Footer -->
+  <%- include('../includes/end.ejs')%>
