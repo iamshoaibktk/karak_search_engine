@@ -257,8 +257,8 @@
                   <!-- Profile Item -->
                   <div class="card card-body bg-white mb-3 border-bottom text-dark card  border-0 shadow-lg my-5">
                     <div class="row">
-                      <div class="col-lg-4 text-sm-center">
-                        <img class="rounded" src="/<%= result.entity_img%>" alt="No Image" />
+                      <div class="col-lg-4 text-sm-center ">
+                        <img class="rounded w-100 h-100" src="/<%= result.entity_img%>" alt="No Image" />
                       </div>
                       <div class="col-lg-4 col-md-4 col-8">
                         <h3 id="name" class="navbar-brand">
@@ -279,7 +279,7 @@
                         <!-- </ul> -->
                         <h5><i class="far fa-clock"></i> Opens From</h5>
                         <p><%= result.opening_time%> <span class="text-info"> To </span><%= result.closing_time%></p>
-                        <p><small><i class="far fa-user fa-lg"></i> posted by:</small> <a
+                        <p><small><i class="far fa-user fa-lg"></i> Posted by:</small> <a
                             class="btn btn-outline-info btn-sm" href="/profile/<%= result.user_id %>"><small>View
                               Profile</small></a></p>
                         <form action="/admin/deletePost/<%= result.id%>" method="post">

@@ -26,9 +26,9 @@
               <div class="card card-body bg-white mb-3 border-bottom text-dark card  border-0 shadow-lg my-5" >
                 <div class="row">
                   <div class="col-lg-4 text-sm-center">
-                    <img class="rounded" src="/<%= result.entity_img%>" alt="No Image" />
+                    <img class="rounded w-100 h-100" src="/<%= result.entity_img%>" alt="No Image" />
                   </div>
-                  <div class="col-lg-4 col-md-4 col-8">
+                  <div class="col-lg-5 col-md-5 col-8 text-left">
                     <h3 id="name" class = "navbar-brand">
                       <i class="far fa-id-card fa-lg"></i> <%= result.title %>
                     </h3>
@@ -49,7 +49,7 @@
 
                     <!-- <a href="profile.html" class="btn btn-info">View Profile</a> -->
                   </div>
-                  <div class="col-md-3  d-lg-block ">
+                  <div class="d-lg-block col-lg-3 col-md-3 col-8 text-left">
                     <h5><i class="fab fa-servicestack"></i> Services</h5>
                     <!-- <ul class="list-group"> -->
                     <!-- <li class="list-group-item">Python</li> -->
@@ -57,7 +57,7 @@
                     <!-- </ul> -->
                     <h5><i class="far fa-clock"></i> Opens From</h5>
                     <p><%= result.opening_time%> <span class="text-info"> To </span><%= result.closing_time%></p>
-                    <p><small><i class="far fa-user fa-lg"></i> posted by:</small> <a class="btn btn-outline-info btn-sm" href="/profile/<%= result.user_id %>"><small>View Profile</small></a></p>
+                    <p><small><i class="far fa-user fa-lg"></i> Posted by:</small> <a class="btn btn-outline-info btn-sm" href="/profile/<%= result.user_id %>"><small>View Profile</small></a></p>
                     <% if(logedIn) {%>
                       <% if(!reportText) {%>
                         <form action="/admin/reportPost/<%= result.id%>" method="post">

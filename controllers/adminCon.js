@@ -1,9 +1,7 @@
 const usersMod = require("../models/usersMod");
 const entitiesMod = require("../models/entitiesMod");
 const reportMod = require("../models/reportMod");
-const {
-  validationResult
-} = require("express-validator");
+const { validationResult } = require("express-validator");
 // exports.postDashboard = (req, res, next) => {
 
 // };
@@ -15,37 +13,50 @@ exports.getDashboard = (req, res, next) => {
   let userInfo;
   let allEntities;
   let allUser;
-  entitiesMod.fetchUserSpecific(userId)
+  entitiesMod
+    .fetchUserSpecific(userId)
     .then(([rows]) => {
       entities = rows;
       console.log(rows);
-    }).then(() => {
-      return usersMod.userProfile(userId).then(([rows]) => {
-        userInfo = rows[0];
-      }).catch(err => console.log(err))
-    }).then(() => {
-      return usersMod.countUser().then(([rows]) => {
-        allUser = rows[0].total;
-      }).catch(err => console.log(err))
-    }).then(() => {
-      entitiesMod.countEntities().then(([rows]) => {
-        allEntities = rows[0].total;
-        res.render("admin/dashboard", {
-          pageTitle: "Dashboard",
-          addEntityNav: true,
-          dashboardNav: false,
-          profileNav: true,
-          results: entities,
-          login: true,
-          registerNav: false,
-          loginNav: false,
-          logedIn,
-          user: userInfo,
-          adminLogedIn,
-          allUser: allUser,
-          allEntities: allEntities
-        });
-      }).catch(err => console.log(err))
+    })
+    .then(() => {
+      return usersMod
+        .userProfile(userId)
+        .then(([rows]) => {
+          userInfo = rows[0];
+        })
+        .catch(err => console.log(err));
+    })
+    .then(() => {
+      return usersMod
+        .countUser()
+        .then(([rows]) => {
+          allUser = rows[0].total;
+        })
+        .catch(err => console.log(err));
+    })
+    .then(() => {
+      entitiesMod
+        .countEntities()
+        .then(([rows]) => {
+          allEntities = rows[0].total;
+          res.render("admin/dashboard", {
+            pageTitle: "Dashboard",
+            addEntityNav: true,
+            dashboardNav: false,
+            profileNav: true,
+            results: entities,
+            login: true,
+            registerNav: false,
+            loginNav: false,
+            logedIn,
+            user: userInfo,
+            adminLogedIn,
+            allUser: allUser,
+            allEntities: allEntities
+          });
+        })
+        .catch(err => console.log(err));
     })
     .catch(err => console.log(err));
 };
@@ -121,11 +132,11 @@ exports.addingEntity = (req, res, next) => {
   //     logedIn,
   //     errors: {msg: 'Attach an image(JPG, JPEG, PNG )'},
   //     oldData: entityInfo
-  //   }); 
+  //   });
   // }
   if (req.file) {
     entityInfo.entity_img = req.file.path;
-  } else entityInfo.entity_img = 'no_image';
+  } else entityInfo.entity_img = "no_image";
   entitiesMod
     .saveEntity(entityInfo)
     .then(() => {
@@ -135,11 +146,11 @@ exports.addingEntity = (req, res, next) => {
 };
 
 exports.getEditForm = (req, res, next) => {
-  let errors = req.flash('errors');
+  let errors = req.flash("errors");
   if (errors.length > 0) {
     errors = errors[0];
   }
-  console.log(req.flash('errors'));
+  console.log(req.flash("errors"));
   const logedIn = req.session.isLogedIn;
   const postId = req.params.postId;
   entitiesMod
@@ -189,7 +200,7 @@ exports.editPost = (req, res, next) => {
       logedIn,
       errors: errors.array()[0],
       results
-    }); 
+    });
   }
   //  else if(!req.file) {
   //   console.log(req.file);
@@ -203,18 +214,24 @@ exports.editPost = (req, res, next) => {
   //     logedIn,
   //     errors: {msg: 'Attach an image(JPG, JPEG, PNG )'},
   //     results
-  //   });   
+  //   });
   // }
   if (req.file) {
     results.entity_img = req.file.path;
-  } else results.entity_img = 'No Image';
-  entitiesMod
-    .editEntity(results)
-    .then(() => {
-      res.redirect("/admin/dashboard");
-    })
-    .catch(err => console.log(err));
-
+    entitiesMod
+      .editEntityWithImg(results)
+      .then(() => {
+        res.redirect("/admin/dashboard");
+      })
+      .catch(err => console.log(err));
+  } else {
+    entitiesMod
+      .editEntity(results)
+      .then(() => {
+        res.redirect("/admin/dashboard");
+      })
+      .catch(err => console.log(err));
+  }
 };
 
 exports.profile = (req, res, next) => {
@@ -313,149 +330,163 @@ exports.allEntities = (req, res, next) => {
   const logedIn = req.session.isLogedIn;
   const userId = req.session.user.id;
   const adminLogedIn = req.session.adminLogedIn;
-  entitiesMod.fetchAllPostsJoinUser()
+  entitiesMod
+    .fetchAllPostsJoinUser()
     .then(([allPosts]) => {
-      usersMod.userProfile(userId).then(([rows]) => {
-        console.log(allPosts);
-        res.render('admin/allEntities', {
-          pageTitle: "Admin || All Posts",
-          addEntityNav: false,
-          dashboardNav: false,
-          profileNav: false,
-          results: allPosts,
-          login: true,
-          registerNav: false,
-          loginNav: false,
-          logedIn,
-          user: rows[0],
-          adminLogedIn,
-          allUser: '',
-          allEntities: ''
-        });
-      }).catch(err => console.log(err));
-    }).catch(err => console.log(err));
-}
+      usersMod
+        .userProfile(userId)
+        .then(([rows]) => {
+          console.log(allPosts);
+          res.render("admin/allEntities", {
+            pageTitle: "Admin || All Posts",
+            addEntityNav: false,
+            dashboardNav: false,
+            profileNav: false,
+            results: allPosts,
+            login: true,
+            registerNav: false,
+            loginNav: false,
+            logedIn,
+            user: rows[0],
+            adminLogedIn,
+            allUser: "",
+            allEntities: ""
+          });
+        })
+        .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
+};
 
 exports.allUsers = (req, res, next) => {
   const logedIn = req.session.isLogedIn;
   const userId = req.session.user.id;
   const adminLogedIn = req.session.adminLogedIn;
-  const error = req.flash('error');
-  usersMod.fetchAllUsers()
+  const error = req.flash("error");
+  usersMod
+    .fetchAllUsers()
     .then(([allUsers]) => {
-      usersMod.userProfile(userId).then(([rows]) => {
-        res.render('admin/allUsers', {
-          pageTitle: "Admin || All Users",
-          addEntityNav: false,
-          dashboardNav: false,
-          profileNav: false,
-          results: allUsers,
-          login: false,
-          registerNav: false,
-          loginNav: false,
-          logedIn,
-          user: rows[0],
-          adminLogedIn,
-          allUser: '',
-          allEntities: '',
-          error
-        });
-      }).catch(err => console.log(err));
-    }).catch(err => console.log(err));
-}
-
-exports.deleteUser = (req, res, next) => {
-  const userId = req.params.userId;
-  usersMod.userProfile(userId)
-    .then(([userData]) => {
-      if (userData[0].user_role != 1) {
-        return usersMod.deleteUser(userId)
-          .then(() => {
-            res.redirect('/admin/allUsers');
-          })
-          .catch(err => console.log(err));
-      } else {
-        req.flash('error', 'Admin cannot be deleted');
-        res.redirect('/admin/allUsers');
-      }
-    })
-    .catch();
-}
-
-exports.reportPost = (req, res, next) => {
-  const userId = req.session.user.id;
-  const postId = req.params.postId;
-  const text = req.body.reportText;
-  const logedIn = req.session.isLogedIn;
-  entitiesMod.checkExistingRepot(userId, postId)
-    .then(([reports]) => {
-      if (reports.length > 0) {
-        return entitiesMod.fetchSpecific(postId)
-          .then(([rows]) => {
-            res.render('main/searchResults', {
-              pageTitle: 'Post report',
-              registerNav: true,
-              loginNav: true,
-              logedIn,
-              addEntityNav: true,
-              dashboardNav: true,
-              profileNav: true,
-              results: rows,
-              reportedCon: 'Already Reported',
-              reportText: true
-            });
-          })
-      } else {
-        return entitiesMod.reportPost(userId, postId, text)
-          .then(() => {
-            return entitiesMod.fetchSpecific(postId)
-              .then(([rows]) => {
-                res.render('main/searchResults', {
-                  pageTitle: 'Post Reported',
-                  registerNav: true,
-                  loginNav: true,
-                  logedIn,
-                  addEntityNav: true,
-                  dashboardNav: true,
-                  profileNav: true,
-                  results: rows,
-                  reportedCon: 'Post reported to admin',
-                  reportText: true
-                });
-              })
-          })
-          .catch(err => console.log(err));
-      }
-    }).catch(err => console.log(err));
-}
-
-exports.reports = (req, res, next) => {
-  const adminLogedIn = req.session.adminLogedIn;
-  const logedIn = req.session.isLogedIn;
-  const userId = req.session.user.id;
-  usersMod.userProfile(userId)
-    .then(([rows]) => {
-      return entitiesMod.reports()
-        .then(([reports]) => {
-          return res.render('admin/reports', {
-            pageTitle: "Admin || Reports",
+      usersMod
+        .userProfile(userId)
+        .then(([rows]) => {
+          res.render("admin/allUsers", {
+            pageTitle: "Admin || All Users",
             addEntityNav: false,
             dashboardNav: false,
             profileNav: false,
-            results: reports,
+            results: allUsers,
             login: false,
             registerNav: false,
             loginNav: false,
             logedIn,
             user: rows[0],
             adminLogedIn,
-            allUser: '',
-            allEntities: '',
-            error: ''
+            allUser: "",
+            allEntities: "",
+            error
           });
         })
-    }).catch(err => console.log(err));
-}
+        .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
+};
+
+exports.deleteUser = (req, res, next) => {
+  const userId = req.params.userId;
+  usersMod
+    .userProfile(userId)
+    .then(([userData]) => {
+      if (userData[0].user_role != 1) {
+        return usersMod
+          .deleteUser(userId)
+          .then(() => {
+            res.redirect("/admin/allUsers");
+          })
+          .catch(err => console.log(err));
+      } else {
+        req.flash("error", "Admin cannot be deleted");
+        res.redirect("/admin/allUsers");
+      }
+    })
+    .catch();
+};
+
+exports.reportPost = (req, res, next) => {
+  const userId = req.session.user.id;
+  const postId = req.params.postId;
+  const text = req.body.reportText;
+  const logedIn = req.session.isLogedIn;
+  entitiesMod
+    .checkExistingRepot(userId, postId)
+    .then(([reports]) => {
+      if (reports.length > 0) {
+        return entitiesMod.fetchSpecific(postId).then(([rows]) => {
+          res.render("main/searchResults", {
+            pageTitle: "Post report",
+            registerNav: true,
+            loginNav: true,
+            logedIn,
+            addEntityNav: true,
+            dashboardNav: true,
+            profileNav: true,
+            results: rows,
+            reportedCon: "Already Reported",
+            reportText: true
+          });
+        });
+      } else {
+        return entitiesMod
+          .reportPost(userId, postId, text)
+          .then(() => {
+            return entitiesMod.fetchSpecific(postId).then(([rows]) => {
+              res.render("main/searchResults", {
+                pageTitle: "Post Reported",
+                registerNav: true,
+                loginNav: true,
+                logedIn,
+                addEntityNav: true,
+                dashboardNav: true,
+                profileNav: true,
+                results: rows,
+                reportedCon: "Post reported to admin",
+                reportText: true
+              });
+            });
+          })
+          .catch(err => console.log(err));
+      }
+    })
+    .catch(err => console.log(err));
+};
+
+exports.reports = (req, res, next) => {
+  const adminLogedIn = req.session.adminLogedIn;
+  const logedIn = req.session.isLogedIn;
+  const userId = req.session.user.id;
+  usersMod
+    .userProfile(userId)
+    .then(([rows]) => {
+      return entitiesMod.reports().then(([reports]) => {
+        return res.render("admin/reports", {
+          pageTitle: "Admin || Reports",
+          addEntityNav: false,
+          dashboardNav: false,
+          profileNav: false,
+          results: reports,
+          login: false,
+          registerNav: false,
+          loginNav: false,
+          logedIn,
+          user: rows[0],
+          adminLogedIn,
+          allUser: "",
+          allEntities: "",
+          error: ""
+        });
+      });
+    })
+    .catch(err => console.log(err));
+};
 
 exports.viewReportedPost = (req, res, next) => {
   const postId = req.params.postId;
@@ -463,33 +494,40 @@ exports.viewReportedPost = (req, res, next) => {
   const logedIn = req.session.isLogedIn;
   const adminLogedIn = req.session.adminLogedIn;
   console.log(postId);
-  usersMod.userProfile(userId).then(([rows]) => {
-    return entitiesMod.fetchSpecific(postId).then(([row]) => {
-      res.render('admin/reportedPost', {
-        pageTitle: 'Reported Post',
-        registerNav: true,
-        loginNav: true,
-        logedIn: logedIn,
-        addEntityNav: true,
-        dashboardNav: true,
-        profileNav: true,
-        result: row[0],
-        pageTitle: "Admin || Reports",
-        user: rows[0],
-        adminLogedIn,
-        allUser: '',
-        allEntities: '',
-        error: ''
-      })
-    }).catch(err => console.log(err));
-  }).catch(err => console.log(err));
-}
+  usersMod
+    .userProfile(userId)
+    .then(([rows]) => {
+      return entitiesMod
+        .fetchSpecific(postId)
+        .then(([row]) => {
+          res.render("admin/reportedPost", {
+            pageTitle: "Reported Post",
+            registerNav: true,
+            loginNav: true,
+            logedIn: logedIn,
+            addEntityNav: true,
+            dashboardNav: true,
+            profileNav: true,
+            result: row[0],
+            pageTitle: "Admin || Reports",
+            user: rows[0],
+            adminLogedIn,
+            allUser: "",
+            allEntities: "",
+            error: ""
+          });
+        })
+        .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
+};
 
-exports.deleteReport = (req, res,next) => {
+exports.deleteReport = (req, res, next) => {
   const reportId = req.params.reportId;
-  reportMod.deleteReport(reportId)
-  .then(() => {
-    res.redirect('/admin/reports');
-  })
-  .catch(err => console.log(err));
-} 
+  reportMod
+    .deleteReport(reportId)
+    .then(() => {
+      res.redirect("/admin/reports");
+    })
+    .catch(err => console.log(err));
+};

@@ -327,8 +327,8 @@
                 <tbody>
                   <%for(let result of results) { %>
                   <tr>
-                    <td><%=result.fname%> <%=result.lname%></td>
-                    <td><%=result.user_phn%></td>
+                    <td><a href="/profile/<%= result.id%>"><%=result.fname%> <%=result.lname%></a></td>
+                    <td>0<%=result.user_phn%></td>
                     <td><%=result.created_at%></td>
                     <td>
                       <img class="img-profile rounded-circle img-cus" alt="No image uploaded"
