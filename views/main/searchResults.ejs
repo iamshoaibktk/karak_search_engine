@@ -11,7 +11,7 @@
           <div class="row">
             <div class="col-md-12">
               <% if(!reportText) { %>
-              <h1 class="display-4 text-center">Search Results</h1>
+              <h1 class="display-4 text-center text-info">Search Results</h1>
               <p class="lead text-center">
                 We tried to bring you the best results
               </p>
@@ -30,15 +30,15 @@
                   </div>
                   <div class="col-lg-5 col-md-5 col-8 text-left">
                     <h3 id="name" class = "navbar-brand">
-                      <i class="far fa-id-card fa-lg"></i> <%= result.title %>
+                      <i class="far fa-id-card fa-lg text-info"></i> <%= result.title %>
                     </h3>
                     <p id="address">
-                      <i class="fas fa-address-book"></i> Address : <%= result.address%>
+                      <i class="fas fa-address-book text-info"></i> Address : <%= result.address%>
                     </p>
-                    <p><i class="fas fa-arrow-right"></i> Category : <%= result.category %></p>
-                    <p><i class="fas fa-user-md"></i> Description : <%= result.entity_desc %></p>
+                    <p><i class="fas fa-arrow-right text-info"></i> Category : <%= result.category %></p>
+                    <p><i class="fas fa-user-md text-info"></i> Description : <%= result.entity_desc %></p>
                     <p id="contact-num">
-                      <i class="fas fa-phone-volume"></i> 0<%= result.entity_phn%>
+                      <i class="fas fa-phone-volume text-info"></i> 0<%= result.entity_phn%>
                     </p>
 
                     <!-- <i class="fa fa-star fa-lg" aria-hidden="true"></i>
@@ -50,14 +50,14 @@
                     <!-- <a href="profile.html" class="btn btn-info">View Profile</a> -->
                   </div>
                   <div class="d-lg-block col-lg-3 col-md-3 col-8 text-left">
-                    <h5><i class="fab fa-servicestack"></i> Services</h5>
+                    <h5><i class="fab fa-servicestack text-info"></i> Services</h5>
                     <!-- <ul class="list-group"> -->
                     <!-- <li class="list-group-item">Python</li> -->
                     <p><%=result.services%></p>
                     <!-- </ul> -->
-                    <h5><i class="far fa-clock"></i> Opens From</h5>
+                    <h5><i class="far fa-clock text-info"></i> Opens From</h5>
                     <p><%= result.opening_time%> <span class="text-info"> To </span><%= result.closing_time%></p>
-                    <p><small><i class="far fa-user fa-lg"></i> Posted by:</small> <a class="btn btn-outline-info btn-sm" href="/profile/<%= result.user_id %>"><small>View Profile</small></a></p>
+                    <p><small><i class="far fa-user fa-lg text-info"></i> Posted by:</small> <a class="btn btn-outline-info btn-sm" href="/profile/<%= result.user_id %>"><small>View Profile</small></a></p>
                     <% if(logedIn) {%>
                       <% if(!reportText) {%>
                         <form action="/admin/reportPost/<%= result.id%>" method="post">
